@@ -21,8 +21,8 @@ namespace ASP_MVC_Lesson_8.Models
         [Display(Name = "Cat's photo")]
         public byte[]? Image { get; set; }
         [Display(Name = "Cat's gender")]
-        public string Gender { get; set; }
-        //public CatsGender Gender { get; set; }
+        //public string Gender { get; set; }
+        public CatsGender Gender { get; set; }
         [ForeignKey(nameof(Breed))]
         public int BreedId { get; set; } = default!;
         public virtual Breed Breed { get; set; } = default!;
