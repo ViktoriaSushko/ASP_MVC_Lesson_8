@@ -1,0 +1,37 @@
+﻿@using ASP_MVC_Lesson_8.Data
+@model IEnumerable<Cat>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">@Html.DisplayNameFor(model=>model.Id)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.CatName)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Description)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Breed.BreedName)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Gender)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Image)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cat in Model)
+            {
+                <tr>
+                    <th scope="row">@cat.Id</th>
+                    <td>@cat.CatName</td>
+                    <td>@cat.Description</td>
+                    <td>@cat.Breed.BreedName</td>
+<td>@cat.Gender</td>
+                    <td> 
+                        <img src="data:image/*;base64,@Convert.ToBase64String(cat.Image!)" alt="@cat.CatName" style="width:200px" />
+                        </td>
+                </tr>
+                
+            }
+           
+        </tbody>
+    </table>
+</div>

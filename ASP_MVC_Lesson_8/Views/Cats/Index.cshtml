@@ -1,0 +1,72 @@
+﻿@using ASP_MVC_Lesson_8.Models.ViewModel
+@model IndexCatVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Cats</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form method="get">
+    <div class="row">
+        <div class="col col-md-4 col-12">
+            <div class="form-floating mb-3">
+                <select name="breedId" asp-items="@Model.BreedsSL" class="form-select" id="breedsSelect">
+                    <option value="0">All</option>
+                </select>
+                <label for="breedsSelect" class="form-label">Select breed:</label>
+            </div>
+        </div>
+        <div class="col col-md-4 col-12">
+            <div class="form-floating mb-3">
+                <input name="search" class="form-control" placeholder="Type to filter by name of cat" value="@Model.Search" />
+            </div>
+        </div>
+        <div class="col col-md-4 col-12">
+            <input type="submit" value="Filter" class="btn btn-secondary"/>
+        </div>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Cats.FirstOrDefault()!.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.Cats.FirstOrDefault()!.Image)</th>
+            <th>@Html.DisplayNameFor(model => model.Cats.FirstOrDefault()!.Breed)</th>
+            <th>@Html.DisplayNameFor(model => model.Cats.FirstOrDefault()!.CatName)</th>
+            <th>@Html.DisplayNameFor(model => model.Cats.FirstOrDefault()!.Description)</th>
+            <th>@Html.DisplayNameFor(model => model.Cats.FirstOrDefault()!.Gender)</th>
+            <th>@Html.DisplayNameFor(model => model.Cats.FirstOrDefault()!.IsVacinated)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Cats)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>
+                    <img src="data:image/*;base64,@Convert.ToBase64String(item.Image!)" alt="@item.CatName" style="width:200px" />
+                </td>
+                <td>@item.Breed?.BreedName</td>
+                <td>@Html.DisplayFor(modelItem => item.CatName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                <td>@Html.DisplayFor(modelItem => item.IsVacinated)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="text-center">
+    <nav aria-label="Page navigation example">
+        <pager items-per-page="@Model.ItemsPerPage" page-count="@Model.PageCount" current-page="@Model.CurrentPage" href="/cats/index"></pager>
+        </nav>
+    </div>
