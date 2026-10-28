@@ -44,7 +44,7 @@ namespace ASP_MVC_Lesson_8.Services
                 {
                     CatName = "Vasyl",
                     Description = lorem1,
-                    //Gender = CatsGender.Male,
+                    Gender = CatsGender.Male,
                     Image = image1,
                     IsVacinated = false,
                     IsDeleted = false,
